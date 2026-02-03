@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Valentine Proposal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe6f2;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        .question {
+            display: none;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+        .question.active {
+            display: block;
+        }
+        button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #ff1493;
+        }
+        #proposal {
+            font-size: 24px;
+            color: #d1001c;
+        }
+        img {
+            max-width: 300px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Will You Be My Valentine?</h1>
+    
+    <div id="q1" class="question active">
+        <p>Question 1: What's my favorite color?</p>
+        <button onclick="nextQuestion('q2')">Pink</button>
+        <button onclick="nextQuestion('q2')">Blue</button>
+    </div>
+    
+    <div id="q2" class="question">
+        <p>Question 2: How many times have we laughed together?</p>
+        <button onclick="nextQuestion('q3')">A lot</button>
+        <button onclick="nextQuestion('q3')">Countless</button>
+    </div>
+    
+    <div id="q3" class="question">
+        <p>Question 3: Will you be my forever Valentine?</p>
+        <button onclick="showProposal()">Yes!</button>
+        <button onclick="showProposal()">Absolutely!</button>
+    </div>
+    
+    <div id="proposal" class="question">
+        <p>Yes! I love you more than words can say. You've made my life brighter, and I can't imagine it without you. Will you be mine forever? 💖</p>
+        <img src="https://via.placeholder.com/300x200?text=Our+Photo" alt="Us together"> <!-- Replace with your actual image URL or local path -->
+    </div>
+    
+    <script>
+        function nextQuestion(nextId) {
+            document.querySelector('.active').classList.remove('active');
+            document.getElementById(nextId).classList.add('active');
+        }
+        
+        function showProposal() {
+            document.querySelector('.active').classList.remove('active');
+            document.getElementById('proposal').classList.add('active');
+        }
+    </script>
+</body>
+</html>
