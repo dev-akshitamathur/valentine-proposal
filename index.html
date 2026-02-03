@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Valentine Couple Proposal</title>
+<style>
+    body {
+        font-family: 'Georgia', serif;
+        background: #ffe6ef;
+        color: #8B0000;
+        text-align: center;
+        padding: 30px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    h1 {
+        font-size: 2.8rem;
+        margin-bottom: 1rem;
+        color: #b2222d;
+        text-shadow: 1px 1px 3px #f9c5d1;
+        letter-spacing: 2px;
+    }
+    .question {
+        display: none;
+        max-width: 420px;
+        margin: 0 auto 30px;
+        padding: 25px 20px;
+        border-radius: 15px;
+        background: #fff0f6;
+        box-shadow: 0 8px 20px rgba(178, 34, 45, 0.3);
+        font-size: 1.25rem;
+        line-height: 1.5;
+        position: relative;
+    }
+    .question.active {
+        display: block;
+    }
+    button {
+        border: none;
+        padding: 14px 30px;
+        margin: 12px 10px;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        color: #fff;
+        box-shadow: 0 6px 15px rgba(178, 34, 45, 0.5);
+        transition: background-color 0.4s ease, transform 0.2s ease;
+        user-select: none;
+    }
+    button:focus {
+        outline: 3px solid #f794a4;
+        outline-offset: 2px;
+    }
+    button:hover {
+        transform: translateY(-3px);
+    }
+    .pink-btn {
+        background: #d6336c;
+    }
+    .black-btn {
+        background: #5c0404;
+    }
+    .valentine-btn {
+        background: #e63946;
+    }
+    .valentine-btn:hover {
+        background: #ab2d35;
+    }
+    .yes-btn {
+        background: #f72585;
+    }
+    .no-btn {
+        background: #720026;
+    }
+    #sad-msg {
+        margin-top: 15px;
+        color: #b22222;
+        font-weight: 600;
+        font-size: 1.1rem;
+        display: none;
+        user-select: none;
+    }
+    #sad-emoji {
+        margin-left: 6px;
+        font-size: 1.6rem;
+        vertical-align: middle;
+    }
+    #proposal {
+        font-size: 1.5rem;
+        color: #a50034;
+        line-height: 1.6;
+        max-width: 450px;
+        margin: 0 auto;
+        background: #f9d6dd;
+        padding: 25px 30px;
+        border-radius: 18px;
+        box-shadow: 0 6px 18px rgba(165, 0, 52, 0.3);
+        position: relative;
+        overflow: visible;
+    }
+
+    /* Hearts rain styles */
+    .hearts-container {
+        position: relative;
+        height: 200px;
+        overflow: visible;
+        margin-top: 25px;
+    }
+    .heart {
+        position: absolute;
+        bottom: 0;
+        font-size: 2rem;
+        animation: floatUp 4s linear infinite;
+        opacity: 0.8;
+        user-select: none;
+    }
+    .heart:nth-child(1) {
+        left: 10%;
+        animation-delay: 0s;
+        font-size: 2.2rem;
+    }
+    .heart:nth-child(2) {
+        left: 30%;
+        animation-delay: 1.3s;
+        font-size: 1.8rem;
+    }
+    .heart:nth-child(3) {
+        left: 50%;
+        animation-delay: 0.7s;
+        font-size: 2.5rem;
+    }
+    .heart:nth-child(4) {
+        left: 70%;
+        animation-delay: 2s;
+        font-size: 2rem;
+    }
+    .heart:nth-child(5) {
+        left: 85%;
+        animation-delay: 1.8s;
+        font-size: 1.6rem;
+    }
+
+    @keyframes floatUp {
+        0% {
+            transform: translateY(0) scale(1);
+            opacity: 0.8;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-250px) scale(1.2);
+            opacity: 0;
+        }
+    }
+
+    /* Shake animation for 'No' button */
+    @keyframes shake {
+      0% { transform: translate(1px, 0); }
+      20% { transform: translate(-2px, 0);}
+      40% { transform: translate(2px, 0);}
+      60% { transform: translate(-2px, 0);}
+      80% { transform: translate(2px, 0);}
+      100% { transform: translate(0, 0);}
+    }
+</style>
+</head>
+<body>
+
+<h1>Will You Be My Valentine? ❤️</h1>
+
+<div id="q1" class="question active">
+    <p>Question 1: What's my favorite color? 🌈</p>
+    <button class="pink-btn" onclick="nextQuestion('q2')">Pink 💕</button>
+    <button class="black-btn" onclick="nextQuestion('q2')">Black 🖤</button>
+</div>
+
+<div id="q2" class="question">
+    <p>Question 2: When did we meet? 📅</p>
+    <button class="valentine-btn" onclick="wrongDate()">22nd Jan 2024 💌</button>
+    <button class="valentine-btn" onclick="correctDate()">12th March 2024 💘</button>
+    <button class="valentine-btn" onclick="wrongDate()">14th April 2024 💝</button>
+    <p id="sad-msg">Oops, that's not the right date! <span id="sad-emoji">😢</span></p>
+</div>
+
+<div id="q3" class="question">
+    <p>Question 3: Will you be my forever Valentine? ❤️</p>
+    <button class="yes-btn" onclick="showProposal()">Yes! 😍</button>
+    <button class="no-btn" onclick="playfulNo()">No 😥</button>
+</div>
+
+<div id="proposal" class="question">
+    <p>Yes! I love you more than words can express. You've made my world brighter, and I can't wait to spend forever with you. 💖😘</p>
+    <div class="hearts-container" aria-hidden="true">
+      <span class="heart">❤️</span>
+      <span class="heart">💖</span>
+      <span class="heart">💕</span>
+      <span class="heart">💘</span>
+      <span class="heart">💝</span>
+    </div>
+</div>
+
+<script>
+function nextQuestion(nextId) {
+    resetSadMsg();
+    document.querySelector('.active').classList.remove('active');
+    document.getElementById(nextId).classList.add('active');
+}
+
+function correctDate() {
+    resetSadMsg();
+    nextQuestion('q3');
+}
+
+function wrongDate() {
+    const sadMsg = document.getElementById('sad-msg');
+    sadMsg.style.display = 'block';
+}
+
+function resetSadMsg() {
+    const sadMsg = document.getElementById('sad-msg');
+    sadMsg.style.display = 'none';
+}
+
+function showProposal() {
+    document.querySelector('.active').classList.remove('active');
+    document.getElementById('proposal').classList.add('active');
+}
+
+function playfulNo() {
+    alert("Aw, come on! Love can't be denied! 💞");
+    const q3 = document.getElementById('q3');
+    const noBtn = q3.querySelector('.no-btn');
+    // Shake animation and disable for 2 seconds
+    noBtn.style.animation = "shake 0.4s";
+    noBtn.disabled = true;
+    setTimeout(() => {
+        noBtn.style.animation = '';
+        noBtn.disabled = false;
+    }, 2000);
+}
+</script>
+
+</body>
+</html>
